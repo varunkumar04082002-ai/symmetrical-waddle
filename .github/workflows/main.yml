@@ -30,7 +30,8 @@ jobs:
       - name: Prepare app files
         run: |
           mkdir -p www
-          cp MealDiary-4.html www/index.html
+          cp MealDiary-5.html www/index.html
+
           cat > package.json <<'EOF'
           {
             "name": "meal-diary",
@@ -38,7 +39,9 @@ jobs:
             "private": true
           }
           EOF
+
           npm install @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7
+
           cat > capacitor.config.json <<'EOF'
           {
             "appId": "com.varun.mealdiary",
@@ -49,6 +52,84 @@ jobs:
 
       - name: Add Android platform
         run: npx cap add android
+
+      - name: Install native backup bridge
+        run: |
+          mkdir -p android/app/src/main/java/com/varun/mealdiary
+
+          cat > android/app/src/main/java/com/varun/mealdiary/MainActivity.java <<'JAVA'
+          package com.varun.mealdiary;
+
+          import android.content.ContentValues;
+          import android.net.Uri;
+          import android.os.Build;
+          import android.os.Bundle;
+          import android.os.Environment;
+          import android.provider.MediaStore;
+          import android.util.Base64;
+          import android.webkit.JavascriptInterface;
+          import com.getcapacitor.BridgeActivity;
+          import java.io.File;
+          import java.io.FileOutputStream;
+          import java.io.OutputStream;
+
+          public class MainActivity extends BridgeActivity {
+            @Override
+            public void onCreate(Bundle savedInstanceState) {
+              super.onCreate(savedInstanceState);
+              getBridge().getWebView().addJavascriptInterface(
+                new MealDiaryNativeBridge(), "MealDiaryNative");
+            }
+
+            private class MealDiaryNativeBridge {
+              @JavascriptInterface
+              public boolean saveBackup(String filename, String base64Data) {
+                OutputStream output = null;
+                try {
+                  byte[] data = Base64.decode(base64Data, Base64.DEFAULT);
+                  String safeName = filename == null
+                    ? "meal-diary-backup.json"
+                    : filename.replaceAll("[^A-Za-z0-9._-]", "_");
+
+                  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, safeName);
+                    values.put(MediaStore.MediaColumns.MIME_TYPE, "application/json");
+                    values.put(MediaStore.MediaColumns.RELATIVE_PATH,
+                      Environment.DIRECTORY_DOWNLOADS);
+
+                    Uri uri = getContentResolver().insert(
+                      MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
+                    if (uri == null) return false;
+
+                    output = getContentResolver().openOutputStream(uri);
+                    if (output == null) return false;
+                    output.write(data);
+                    output.flush();
+                    output.close();
+                    return true;
+                  }
+
+                  File dir = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DOWNLOADS);
+                  if (!dir.exists() && !dir.mkdirs()) return false;
+
+                  File file = new File(dir, safeName);
+                  output = new FileOutputStream(file);
+                  output.write(data);
+                  output.flush();
+                  output.close();
+                  return true;
+                } catch (Exception e) {
+                  try {
+                    if (output != null) output.close();
+                  } catch (Exception ignored) {}
+                  return false;
+                }
+              }
+            }
+          }
+          JAVA
 
       - name: Sync Capacitor
         run: npx cap sync android
