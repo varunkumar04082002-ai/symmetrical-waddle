@@ -1,0 +1,68 @@
+name: Build Meal Diary Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Prepare app files
+        run: |
+          mkdir -p www
+          cp MealDiary-4.html www/index.html
+          cat > package.json <<'EOF'
+          {
+            "name": "meal-diary",
+            "version": "1.0.0",
+            "private": true
+          }
+          EOF
+          npm install @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.varun.mealdiary",
+            "appName": "Meal Diary",
+            "webDir": "www"
+          }
+          EOF
+
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Meal-Diary-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
