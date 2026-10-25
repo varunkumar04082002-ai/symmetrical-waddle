@@ -25,16 +25,25 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Install dependencies
+      - name: Create package.json
         run: |
-          npm install
-          npm install @capacitor/android
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+
+      - name: Prepare Meal Diary
+        run: |
+          mkdir -p www
+          cp MealDiary-5.html www/index.html
 
       - name: Create Capacitor configuration
         run: |
-          node -e "const fs=require('fs');fs.writeFileSync('capacitor.config.json',JSON.stringify({appId:'com.varun.mealdiary',appName:'Meal Diary',webDir:'www'}))"
-          mkdir -p www
-          cp MealDiary-5.html www/index.html
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.varun.mealdiary",
+            "appName": "Meal Diary",
+            "webDir": "www"
+          }
+          EOF
           npx cap add android
           npx cap sync android
 
