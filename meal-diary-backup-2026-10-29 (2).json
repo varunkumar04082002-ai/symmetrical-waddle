@@ -1,0 +1,162 @@
+{
+  "app": "Meal Diary",
+  "version": 8,
+  "records": [
+    {
+      "id": "mvnt2tml-yn6oepho7",
+      "date": "2026-10-25",
+      "time": "17:40",
+      "kind": "Junk",
+      "name": "Egg omelet + very sweet chocolates shake",
+      "notes": "Not very healthy"
+    },
+    {
+      "id": "mvnwk01c-19mj1gx1fvg",
+      "date": "2026-10-25",
+      "time": "19:00",
+      "kind": "Junk",
+      "name": "Jalebi",
+      "notes": "Quantity too much"
+    },
+    {
+      "id": "mvnx2mwz-bjiatlgdww",
+      "date": "2026-10-25",
+      "time": "19:40",
+      "kind": "Meal",
+      "name": "2 roti + yellow dal",
+      "notes": "Reasonable Quantity , right time , healthy"
+    },
+    {
+      "id": "mvoq96v7-3utf9ntwi64",
+      "date": "2026-10-26",
+      "time": "09:20",
+      "kind": "Meal",
+      "name": "2 roti + 3 Egg Burji",
+      "notes": "It was a abit heavy .. no roti or 1 roti would be better"
+    },
+    {
+      "id": "mvph963k-s9nr4dn25pa",
+      "date": "2026-10-26",
+      "time": "21:40",
+      "kind": "Junk",
+      "name": "Rice + Dal + Kheer",
+      "notes": "I over ate alot"
+    },
+    {
+      "id": "mvqeewyf-utb5so85qe",
+      "date": "2026-10-27",
+      "time": "08:50",
+      "kind": "Meal",
+      "name": "2 Gobi Roti + little paneer burji + 2 spoon curd",
+      "notes": "Good"
+    },
+    {
+      "id": "mvqefxd6-appx2f9r2xj",
+      "date": "2026-10-27",
+      "time": "13:30",
+      "kind": "Meal",
+      "name": "3 Roti + little paneer Bhurji",
+      "notes": "It was OK.."
+    },
+    {
+      "id": "mvqsyekp-i2k6vqag9wc",
+      "date": "2026-10-27",
+      "time": "20:00",
+      "kind": "Junk",
+      "name": "Haldiram ' Kachori full packed",
+      "notes": "I felt reflux and bloating after eating it - very unhealthy- high salt"
+    },
+    {
+      "id": "mvqtkfvj-2shqx527yli",
+      "date": "2026-10-27",
+      "time": "18:20",
+      "kind": "Meal",
+      "name": "4 Egg omelet made in good amount of ghee + omega 3 capsule",
+      "notes": "Reasonable amount"
+    },
+    {
+      "id": "mvs3alt9-yh81zcou6i",
+      "date": "2026-10-28",
+      "time": "09:00",
+      "kind": "Meal",
+      "name": "3 Banana",
+      "notes": ""
+    },
+    {
+      "id": "mvs3bmau-wincwgkfio",
+      "date": "2026-10-28",
+      "time": "13:30",
+      "kind": "Meal",
+      "name": "3 Roti plus little alu beans sabji",
+      "notes": ""
+    },
+    {
+      "id": "mvs3cemg-p16t3dkj8f9",
+      "date": "2026-10-28",
+      "time": "15:40",
+      "kind": "Junk",
+      "name": "1 Burger",
+      "notes": ""
+    },
+    {
+      "id": "mvs43u25-hutg0tv6j0d",
+      "date": "2026-10-28",
+      "time": "18:20",
+      "kind": "Junk",
+      "name": "paneer bhurji + 5 Roti",
+      "notes": "I really over ate"
+    },
+    {
+      "id": "mvs92fnx-a6p9kkq2d0p",
+      "date": "2026-10-28",
+      "time": "20:00",
+      "kind": "Junk",
+      "name": "5 bournv chocolate  50 percent dark",
+      "notes": "Tooo much unhealth"
+    }
+  ],
+  "sleepRecords": [
+    {
+      "id": "mvoirfpv-3qkwvz5sjmr",
+      "startedAt": "2026-10-25T21:45:09",
+      "wokeAt": "2026-10-26T05:59:23",
+      "quality": "Good",
+      "notes": ""
+    },
+    {
+      "id": "mvq0p1wr",
+      "startedAt": "2026-10-26T23:55:23",
+      "wokeAt": "2026-10-27T07:08:55",
+      "quality": "Good",
+      "notes": "I slept late"
+    },
+    {
+      "id": "mvrdibqm",
+      "startedAt": "2026-10-27T22:46:14",
+      "wokeAt": "2026-10-28T05:55:22",
+      "quality": "Good",
+      "notes": "Fine"
+    },
+    {
+      "id": "mvsq0v1j",
+      "startedAt": "2026-10-28T23:30:00",
+      "wokeAt": "2026-10-29T04:00:00",
+      "quality": "Poor",
+      "notes": "Itch disturb wake up"
+    }
+  ],
+  "activeSleep": null,
+  "exerciseRecords": [],
+  "studySessions": [],
+  "activeStudy": null,
+  "mindfulnessSessions": [
+    {
+      "id": "mvss0bbs-olt5c73",
+      "date": "2026-10-29",
+      "startedAt": "2026-10-29T05:29:11",
+      "seconds": 7,
+      "createdAt": "2026-10-28T23:59:19.384Z"
+    }
+  ],
+  "activeMeditation": null
+}
